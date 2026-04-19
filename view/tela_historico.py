@@ -1,5 +1,6 @@
 # view/tela_historico.py
 # Tela de Histórico Escolar (RF09, RF10)
+# A view recebe apenas dados prontos (dict) do controller — não acessa o Model.
 
 import PySimpleGUI as sg
 
@@ -19,15 +20,22 @@ class TelaHistorico:
             return v['-CPF-'].strip()
         return None
 
-    def exibir_historico(self, historico, nome_aluno: str = ''):
-        """Exibe histórico escolar completo (RF10)."""
-        if historico is None:
+    def exibir_historico(self, dados_hist: dict, nome_aluno: str = ''):
+        """Exibe histórico escolar completo (RF10).
+        Args:
+            dados_hist: dicionário retornado por HistoricoController.gerar()
+                        {'data_emissao': date, 'registros': [...]}
+            nome_aluno: nome do aluno para o título.
+        """
+        if dados_hist is None:
             sg.popup_error('Histórico não encontrado.'); return
-        dados_hist = historico.gerar_historico_completo()
         registros = dados_hist.get('registros', [])
         if not registros:
             sg.popup('Nenhum registro no histórico.'); return
-        dados = [[r['ano_letivo'], r['media_final'], f"{r['frequencia']:.1f}%", r['situacao'].upper()] for r in registros]
+        dados = [
+            [r['ano_letivo'], r['media_final'], f"{r['frequencia']:.1f}%", r['situacao'].upper()]
+            for r in registros
+        ]
         layout = [
             [sg.Text(f'Histórico Escolar - {nome_aluno}', font=('Helvetica', 14))],
             [sg.Text(f'Data Emissão: {dados_hist["data_emissao"]}')],

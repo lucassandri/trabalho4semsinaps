@@ -261,7 +261,8 @@ class SistemaEscolar:
             hist = self._secretaria_ctrl.emitir_historico(secretaria, cpf)
             aluno = self._secretaria_ctrl.consultar_aluno(cpf)
             nome = aluno.nome if aluno else ''
-            self._tela_historico.exibir_historico(hist, nome)
+            dados_hist = self._historico_ctrl.gerar(hist) if hist else None
+            self._tela_historico.exibir_historico(dados_hist, nome)
 
     def _fluxo_relatorio_turma(self):
         """Relatório de alunos por turma via SecretariaController (RF11)."""
@@ -456,7 +457,8 @@ class SistemaEscolar:
         aluno = self._sistema_ctrl.pessoa_logada
         hist = self._aluno_ctrl.consultar_historico(aluno)
         nome = aluno.nome if aluno else ''
-        self._tela_historico.exibir_historico(hist, nome)
+        dados_hist = self._historico_ctrl.gerar(hist) if hist else None
+        self._tela_historico.exibir_historico(dados_hist, nome)
 
 
 # === Ponto de entrada ===
