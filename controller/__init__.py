@@ -1,2 +1,15 @@
 # controller/__init__.py
 from controller.sistema_controller import SistemaController
+from controller.professor_controller import ProfessorController
+from controller.secretaria_controller import SecretariaController
+from controller.coordenador_controller import CoordenadorController
+from controller.aluno_controller import AlunoController
+from controller.usuario_controller import UsuarioController
+from controller.serie_controller import SerieController
+from controller.turma_controller import TurmaController
+from controller.materia_controller import MateriaController
+from controller.matricula_controller import MatriculaController
+from controller.nota_controller import NotaController
+from controller.frequencia_controller import FrequenciaController
+from controller.boletim_controller import BoletimController
+from controller.historico_controller import HistoricoController
