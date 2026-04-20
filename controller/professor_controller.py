@@ -1,16 +1,16 @@
 # controller/professor_controller.py
-# Controller de Professor - delega RF05 e RF06 ao objeto Professor
+# Controller do ator Professor - apenas operações que o Professor executa (RF05, RF06)
+# Listagem/busca de professores: RF03 (Secretaria) → SecretariaController
+#                                 RF04 (Coordenador) → CoordenadorController
 
 from cache.cache_manager import CacheManager
 
 
 class ProfessorController:
-    """Gerencia operações do Professor: notas (RF05) e frequências (RF06)."""
+    """Operações do ator Professor: registrar notas (RF05) e frequências (RF06)."""
 
     def __init__(self):
         self._cache = CacheManager()
-
-    # --- Notas (RF05) ---
 
     def registrar_nota(self, professor, cod_matricula: str, cod_materia: str,
                        bimestre: int, valor: float) -> bool:
@@ -20,8 +20,6 @@ class ProfessorController:
         if not matricula or not materia:
             return False
         return professor.registrar_nota(matricula, materia, bimestre, valor)
-
-    # --- Frequência (RF06) ---
 
     def registrar_frequencia(self, professor, cod_matricula: str, cod_materia: str,
                              data_aula, presente: bool) -> bool:
@@ -40,13 +38,3 @@ class ProfessorController:
         if not matricula or not materia:
             return False
         return professor.editar_frequencia(matricula, materia, data_aula, presente)
-
-    # --- Consultas ---
-
-    def listar_professores(self) -> list:
-        """Lista todos os professores cadastrados."""
-        return self._cache.listar_professores()
-
-    def buscar_professor(self, matricula_funcionario: str):
-        """Busca professor pela matrícula funcional."""
-        return self._cache.buscar_professor(matricula_funcionario)

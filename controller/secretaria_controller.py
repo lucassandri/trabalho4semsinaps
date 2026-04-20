@@ -75,6 +75,10 @@ class SecretariaController:
                 or self._cache.buscar_secretaria(matricula)
                 or self._cache.buscar_coordenador(matricula))
 
+    def listar_professores(self) -> list:
+        """Lista todos os professores cadastrados (RF03)."""
+        return self._cache.listar_professores()
+
     # --- Matrículas (RF02) ---
 
     def efetuar_matricula(self, secretaria, cpf_aluno: str, cod_turma: str):

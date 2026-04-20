@@ -216,7 +216,7 @@ class SistemaEscolar:
                     func = self._secretaria_ctrl.consultar_funcionario(mat)
                     self._tela_func.exibir_dados(func)
             elif opcao == 'Listar Professores':
-                self._tela_func.abrir_listagem(self._professor_ctrl.listar_professores())
+                self._tela_func.abrir_listagem(self._secretaria_ctrl.listar_professores())
 
     def _fluxo_matriculas(self):
         """Gerenciamento de matrículas via SecretariaController (RF02)."""
@@ -226,7 +226,7 @@ class SistemaEscolar:
             if opcao == 'Voltar':
                 return
             if opcao == 'Efetuar Matrícula':
-                alunos = self._aluno_ctrl.listar_alunos()
+                alunos = self._secretaria_ctrl.listar_alunos()
                 turmas = self._turma_ctrl.listar()
                 cpf, cod_turma = self._tela_matricula.abrir_efetuar(alunos, turmas)
                 if cpf and cod_turma:
@@ -355,7 +355,7 @@ class SistemaEscolar:
         """Atribuição de professor a matéria/turma via CoordenadorController (RF04)."""
         import PySimpleGUI as sg
         coordenador = self._sistema_ctrl.pessoa_logada
-        profs = self._professor_ctrl.listar_professores()
+        profs = self._coordenador_ctrl.listar_professores()
         mats = self._materia_ctrl.listar()
         turmas = self._turma_ctrl.listar()
         if not profs or not mats or not turmas:

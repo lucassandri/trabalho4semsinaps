@@ -1,16 +1,15 @@
 # controller/aluno_controller.py
-# Controller de Aluno - delega RF09 ao objeto Aluno
+# Controller do ator Aluno - apenas operações que o Aluno executa (RF09)
+# Busca/listagem de alunos é RF01 (Secretaria) → SecretariaController
 
 from cache.cache_manager import CacheManager
 
 
 class AlunoController:
-    """Gerencia operações do Aluno: consulta de boletim e histórico (RF09)."""
+    """Operações do ator Aluno: consulta de boletim e histórico (RF09)."""
 
     def __init__(self):
         self._cache = CacheManager()
-
-    # --- Consultas (RF09) ---
 
     def consultar_boletim(self, aluno, cod_matricula: str):
         """Consulta boletim de uma matrícula via Aluno (RF09)."""
@@ -24,19 +23,9 @@ class AlunoController:
         return aluno.consultar_historico()
 
     def listar_matriculas(self, aluno) -> list:
-        """Lista matrículas do aluno."""
+        """Lista matrículas do aluno (RF09)."""
         return aluno.matriculas
 
     def listar_historicos(self, aluno) -> list:
-        """Lista históricos escolares do aluno."""
+        """Lista históricos escolares do aluno (RF09)."""
         return aluno.historicos
-
-    # --- Busca ---
-
-    def buscar_aluno(self, cpf: str):
-        """Busca aluno pelo CPF."""
-        return self._cache.buscar_aluno(cpf)
-
-    def listar_alunos(self) -> list:
-        """Lista todos os alunos."""
-        return self._cache.listar_alunos()
